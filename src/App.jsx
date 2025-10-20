@@ -1,9 +1,68 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Navbar from "./components/navbar/Navbar";
+import LeftBar from "./components/leftbar/Leftbar";
+import RightBar from "./components/rightBar/RightBar";
+import Home from "./pages/home/Home";
+import Profile from "./pages/profile/Profile";
 
 function App() {
-  return <div>
-    <Login />
-  </div>;
+
+  const Layout = () => {
+    return(
+      <div>
+        <Navbar />
+        <div style={{ display: "flex" }}> 
+          <LeftBar />
+          <Outlet />
+          <RightBar />
+        </div>
+      </div>
+    );
+  }
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/profiles/:id" element={<Profile />} />
+        </Route>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/register" element={<Register />}/>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
 export default App;
+
+
+//Alternative way to set up routing
+// const router = createBrowserRouter([
+//     {
+//         path: "/login",
+//         element: <Login />
+//     },
+//     {
+//         path: "/register",
+//         element: <Register />
+//     },
+//     {
+//       path: "/",
+//       element: <Layout />,
+//       chlidren: [
+//         {
+//           path: "/",
+//           element: <Home />
+//         },
+//         {
+//           path: "/profiles/:id",
+//           element: <Profile />
+//         }
+//       ]
+//     }
+// ])
+
+// And then  the app returns instead
+// <RouterProvider router={router} />
