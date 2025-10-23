@@ -3,7 +3,7 @@ import "./RightBar.scss";
 const RightBar = () =>{
     return(
         <div className="rightBar">
-            RighttBar
+            RightBar
         </div>
     )
 }
